@@ -13,17 +13,21 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="User"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgAvatar"
-        android:layout_width="102dp"
+        android:layout_width="0dp"
         android:layout_height="86dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGetUsers"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtUserName"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 

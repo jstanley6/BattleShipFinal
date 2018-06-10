@@ -53,13 +53,11 @@ public class UserPreferences {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public UserPreferences() {
     }
 
     /**
-     *
      * @param lastName
      * @param experiencePoints
      * @param gaming
@@ -96,7 +94,7 @@ public class UserPreferences {
     }
 
     public String toString() {
-        return avatarName + "\n" + "Level: " + level + "\n" + "Online: " + available ;
+        return avatarName + "\n" + "Level: " + level + "\n" + "Online: " + available;
     }
 
     public Integer getId() {

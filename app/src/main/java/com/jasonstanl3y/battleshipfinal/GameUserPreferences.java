@@ -14,15 +14,15 @@ import com.squareup.picasso.Picasso;
 
 public class GameUserPreferences extends BaseActivity {
 
-TextView txtName;
-TextView txtLevel;
-TextView txtCoins;
-TextView txtWon;
-TextView txtLost;
-TextView txtTied;
-TextView txtExp;
-TextView txtAvailable;
-ImageView imageAvatar;
+    TextView txtName;
+    TextView txtLevel;
+    TextView txtCoins;
+    TextView txtWon;
+    TextView txtLost;
+    TextView txtTied;
+    TextView txtExp;
+    TextView txtAvailable;
+    ImageView imageAvatar;
 
 
     @Override

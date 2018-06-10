@@ -17,11 +17,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,17 +48,62 @@ public class GameLobby extends BaseActivity {
         imgAvatar = findViewById(R.id.imgAvatar);
         lstViewUsers = findViewById(R.id.lstViewUsers);
 
-        txtUserName.setText(userPrefs.getFirstName());
+        txtUserName.setText(userPrefs.getAvatarName());
         Picasso.with(getApplicationContext()).load(BATTLE_SERVER_URL + userPrefs.getAvatarImage()).into(imgAvatar);
 
     }
 
     public void ChallengeComputerOnClick(View v) {
-        intent = new Intent(getApplicationContext(), BoardSetup.class);
-        GameLobby.this.startActivity(intent);
+
+        //Challegen Computer
+        String url = BATTLE_SERVER_URL + "api/v1/challenge_computer.json";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("INTERNET", response.toString());
+
+                        try {
+                            gameID = response.getInt("game_id");
+                            intent = new Intent(getApplicationContext(), BoardSetup.class);
+                            GameLobby.this.startActivity(intent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        ;
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("INTERNET", error.toString());
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                String credentials = username + ":" + password;
+                Log.d("AUTH", "Login Info: " + credentials);
+                String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                headers.put("Authorization", auth);
+                return headers;
+            }
+
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+
+        requestQueue.add(request);
+
     }
 
-    public void getUsersOnClick(View v ) {
+    public void getUsersOnClick(View v) {
 
         String url = BATTLE_SERVER_URL + "api/v1/all_users.json";
         StringRequest request = new StringRequest(
@@ -61,28 +111,27 @@ public class GameLobby extends BaseActivity {
                 // Call backs
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse( String response ) {
+                    public void onResponse(String response) {
                         // Do something with the returned data
-                        Log.d( "INTERNET", response );
-                        users = gson.fromJson( response, UserPreferences[].class );
-                        adapter = new ArrayAdapter<UserPreferences>( getApplicationContext(), R.layout.activity_listview, users );
-                        lstViewUsers.setAdapter( adapter );
+                        Log.d("INTERNET", response);
+                        users = gson.fromJson(response, UserPreferences[].class);
+                        adapter = new ArrayAdapter<UserPreferences>(getApplicationContext(), R.layout.activity_listview, users);
+                        lstViewUsers.setAdapter(adapter);
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse( VolleyError error ) {
+                    public void onErrorResponse(VolleyError error) {
                         // Do something with the error
-                        Log.d( "INTERNET", error.toString() );
+                        Log.d("INTERNET", error.toString());
 
-                        toastIt( "Internet Failure: " + error.toString() );
+                        toastIt("Internet Failure: " + error.toString());
                     }
                 });
 
-        requestQueue.add( request );
+        requestQueue.add(request);
     }
-
 
 
 }

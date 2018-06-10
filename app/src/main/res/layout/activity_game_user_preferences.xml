@@ -102,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Name"
+        android:text="Avatar Name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/txtAvatarName"
@@ -115,6 +115,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Coins"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLevel" />
 
@@ -125,6 +126,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Level"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAvatarName" />
 
@@ -135,6 +137,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Name"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -145,6 +148,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Battles Won"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCoins" />
 
@@ -155,6 +159,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Battles Tied"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtWon" />
 
@@ -165,6 +170,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Battles Lost"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTied" />
 
@@ -175,6 +181,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Exp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLost" />
 
@@ -185,6 +192,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:text="Available"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtExp" />
 

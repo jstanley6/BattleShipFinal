@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity {
     EditText edtUserName;
     EditText edtPassword;
     Button btnLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,20 +46,20 @@ public class MainActivity extends BaseActivity {
 
     public void loginOnClick(View v) {
 
-       username = edtUserName.getText().toString();
-       password = edtPassword.getText().toString();
+        username = edtUserName.getText().toString();
+        password = edtPassword.getText().toString();
 
 
-        String url = "http://www.battlegameserver.com/api/v1/login.json";
+        String url = BATTLE_SERVER_URL + "api/v1/login.json";
         StringRequest request = new StringRequest(
                 Request.Method.GET, url,
                 // Call backs
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse( String response ) {
+                    public void onResponse(String response) {
                         // Do something with the returned data
-                        Log.d( "INTERNET", response );
-                      userPrefs = gson.fromJson( response, UserPreferences.class );
+                        Log.d("INTERNET", response);
+                        userPrefs = gson.fromJson(response, UserPreferences.class);
 
                         intent = new Intent(getApplicationContext(), GameLobby.class);
                         MainActivity.this.startActivity(intent);
@@ -66,9 +67,9 @@ public class MainActivity extends BaseActivity {
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse( VolleyError error ) {
+                    public void onErrorResponse(VolleyError error) {
                         // Do something with the error
-                        Log.d( "INTERNET", error.toString() );
+                        Log.d("INTERNET", error.toString());
                         AlertDialog alertDialog = new AlertDialog.Builder(
                                 MainActivity.this).create();
 
@@ -90,7 +91,7 @@ public class MainActivity extends BaseActivity {
 
                         alertDialog.show();
 
-                        toastIt( "Internet Failure: " + error.toString() );
+                        toastIt("Internet Failure: " + error.toString());
                     }
                 }) {
             @Override
@@ -104,6 +105,6 @@ public class MainActivity extends BaseActivity {
             }
         };
 
-        requestQueue.add( request );
+        requestQueue.add(request);
     }
 }

@@ -61,7 +61,6 @@
         android:ems="10"
         android:hint="Enter Password"
         android:inputType="textPassword"
-        android:text="70905abcde"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"

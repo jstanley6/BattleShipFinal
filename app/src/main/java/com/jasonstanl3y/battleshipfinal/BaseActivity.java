@@ -3,6 +3,7 @@ package com.jasonstanl3y.battleshipfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,16 +21,18 @@ import com.google.gson.GsonBuilder;
 
 public class BaseActivity extends AppCompatActivity {
 
-   static String username, password;
-   Gson gson;
-   RequestQueue requestQueue;
+    static String username, password;
+    Gson gson;
+    RequestQueue requestQueue;
     public static MenuItem prefs;
-   Intent intent;
-   static UserPreferences userPrefs;
-   final String BATTLE_SERVER_URL = "http://www.battlegameserver.com/";
-    static  UserPreferences[] users;
+    Intent intent;
+    static UserPreferences userPrefs;
+    final String BATTLE_SERVER_URL = "http://www.battlegameserver.com/";
+    static UserPreferences[] users;
+    static int gameID;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -55,34 +58,29 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate Menu
-        if (username != "" ) {
+        if (username != "") {
             getMenuInflater().inflate(R.menu.menu, menu);
         }
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-       switch (item.getItemId()) {
+        switch (item.getItemId()) {
 
-                case R.id.menu_Logout:
+            case R.id.menu_Logout:
 
-                    username = "";
-                    password = "";
+                username = "";
+                password = "";
 
-                    intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    return true;
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
 
 
             case R.id.menu_preferences:
                 //switch to the add record activity
 
                 intent = new Intent(this, GameUserPreferences.class);
-
-//                prefs = item;
-//                 prefs.setVisible(false);
-//                intent.putExtra("item", item);
-//                intent.putExtra("name", (Parcelable) prefs);
                 startActivity(intent);
 
 
